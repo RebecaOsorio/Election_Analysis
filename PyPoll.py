@@ -84,7 +84,7 @@ total_vote_counter = 0
 # Declare a new list of candidates
 candidate_options = []
 
-# 1. Declare an empty dictionary
+# Declare an empty dictionary
 candidate_votes = {}
 
 # Open the election results and read the file.
@@ -110,10 +110,18 @@ with open(file_to_load) as election_data:
           # only if it isn't in the list
           if candidate_name not in candidate_options:
                candidate_options.append(candidate_name)
-               # 2. Initialize the Counter for each candidate
+               # Initialize the Counter for each candidate
                candidate_votes[candidate_name] = 0
-
+          
+          # For each row, sum 1 for each candidate_name
           candidate_votes[candidate_name] += 1
 
-# 4. Add a print statement to print out the candidate_options list.
-print(f"{candidate_votes}")
+# Determine the percentage of votes for each candidate by looping through the counts.
+# 1. Iterate through the candidate list.
+for candidate_name in candidate_votes:
+    # 2. Retrieve vote count of a candidate.
+    votes = candidate_votes[candidate_name]
+    # 3. Calculate the percentage of votes.
+    vote_percentage = float(votes) / float(total_vote_counter) * 100
+    # 4. Print the candidate name and percentage of votes.
+    print(f"{candidate_name}: received {vote_percentage: .2f}% of the vote.")
